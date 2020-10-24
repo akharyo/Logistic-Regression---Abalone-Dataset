@@ -1,0 +1,44 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+  html_notebook: default
+---
+
+```{r}
+library(AppliedPredictiveModeling)
+```
+
+
+```{r}
+data("abalone")
+```
+
+
+```{r}
+head(abalone)
+```
+
+
+```{r}
+dt <- subset(abalone, select = c(LongestShell, VisceraWeight, ShellWeight))
+dt
+```
+
+
+```{r}
+fit2 <- glm(LongestShell~ShellWeight+VisceraWeight, data = abalone, family = binomial(link = "logit"))
+fit2
+```
+
+
+```{r}
+summary(fit2)
+```
+
+
+```{r}
+library(predict3d)
+ggPredict(fit2, se=TRUE, interactive=TRUE, digits = 3)
+```
